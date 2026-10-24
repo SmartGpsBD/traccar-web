@@ -153,7 +153,7 @@ const MainToolbar = ({
             >
               <MenuItem value="online">{`${t('deviceStatusOnline')} (${deviceStatusCount('online')})`}</MenuItem>
               <MenuItem value="offline">{`${t('deviceStatusOffline')} (${deviceStatusCount('offline')})`}</MenuItem>
-              <MenuItem value="unknown">{`${t('deviceStatusUnknown')} (${deviceStatusCount('unknown')})`}</MenuItem>
+              <MenuItem value="expired">{`${t('deviceStatusExpired')} (${deviceStatusCount('expired')})`}</MenuItem>
             </Select>
           </FormControl>
           <FormControl>

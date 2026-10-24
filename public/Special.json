@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "days": 30,
+    "amount": 250,
+    "simFee": 300,
+    "simFeeEnable": false,
+    "simText": "1 Year Sim Validity",
+    "description": "1 Month (30 Days)",
+    "badgeText": "Hot Deal",
+    "badge": false
+  },
+  {
+    "id": 2,
+    "days": 61,
+    "amount": 500,
+    "simFee": 0,
+    "simFeeEnable": false,
+    "simText": "1 Year Sim Validity",
+    "description": "2 Months (60 Days)",
+    "badgeText": "Hot Deal",
+    "badge": false
+  },
+  {
+    "id": 3,
+    "days": 92,
+    "amount": 750,
+    "simFee": 0,
+    "simFeeEnable": false,
+    "simText": "1 Year Sim Validity",
+    "description": "3 Months (90 Days)",
+    "badgeText": "Limited Time",
+    "badge": false
+  },
+  {
+    "id": 4,
+    "days": 122,
+    "amount": 1000,
+    "simFee": 0,
+    "simFeeEnable": false,
+    "simText": "1 Year Sim Validity",
+    "description": "4 Months (120 Days)",
+    "badgeText": "Hot Deal",
+    "badge": false
+  },
+  {
+    "id": 5,
+    "days": 183,
+    "amount": 1500,
+    "simFee": 0,
+    "simFeeEnable": false,
+    "simText": "1 Year Sim Validity",
+    "description": "6 Months (180 Days)",
+    "badgeText": "Hot Deal",
+    "badge": false
+  },
+  {
+    "id": 6,
+    "days": 365,
+    "amount": 3000,
+    "simFee": 0,
+    "simFeeEnable": false,
+    "simText": "1 Year Sim Validity",
+    "description": "12 Months (365 Days)",
+    "badgeText": "Hot Deal",
+    "badge": true
+  }
+]

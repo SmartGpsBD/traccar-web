@@ -195,7 +195,7 @@ const UserPage = () => {
             </AccordionSummary>
             <AccordionDetails className={classes.details}>
               <TextField
-                value={item.phone || ''}
+                value={item.phone || setItem({ ...item, phone: '0' })}
                 onChange={(e) => setItem({ ...item, phone: e.target.value })}
                 label={t('sharedPhone')}
               />
@@ -359,7 +359,7 @@ const UserPage = () => {
               <TextField
                 label={t('userExpirationTime')}
                 type="date"
-                value={item.expirationTime ? item.expirationTime.split('T')[0] : '2099-01-01'}
+                value={item.expirationTime ? item.expirationTime.split('T')[0] : '2026-01-01'}
                 onChange={(e) => {
                   if (e.target.value) {
                     setItem({ ...item, expirationTime: new Date(e.target.value).toISOString() });

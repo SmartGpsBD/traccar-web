@@ -3,13 +3,11 @@ import TuneIcon from '@mui/icons-material/Tune';
 import DrawIcon from '@mui/icons-material/Draw';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import FolderIcon from '@mui/icons-material/Folder';
-import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 import BuildIcon from '@mui/icons-material/Build';
-import PeopleIcon from '@mui/icons-material/People';
+import BookIcon from '@mui/icons-material/Book';
 import TodayIcon from '@mui/icons-material/Today';
 import SendIcon from '@mui/icons-material/Send';
-import RouterIcon from '@mui/icons-material/Router';
 import DnsIcon from '@mui/icons-material/Dns';
 import HelpIcon from '@mui/icons-material/Help';
 import PaymentIcon from '@mui/icons-material/Payment';
@@ -55,14 +53,8 @@ const SettingsMenu = () => {
             <MenuItem
               title={t('settingsUser')}
               link={`/settings/user/${userId}`}
-              icon={<PersonIcon />}
+              icon={<BookIcon />}
               selected={location.pathname === `/settings/user/${userId}`}
-            />
-            <MenuItem
-              title={t('deviceTitle')}
-              link="/settings/devices"
-              icon={<DnsIcon />}
-              selected={location.pathname.startsWith('/settings/device')}
             />
             <MenuItem
               title={t('sharedGeofences')}
@@ -76,14 +68,6 @@ const SettingsMenu = () => {
                 link="/settings/groups"
                 icon={<FolderIcon />}
                 selected={location.pathname.startsWith('/settings/group')}
-              />
-            )}
-            {!features.disableDrivers && (
-              <MenuItem
-                title={t('sharedDrivers')}
-                link="/settings/drivers"
-                icon={<PersonIcon />}
-                selected={location.pathname.startsWith('/settings/driver')}
               />
             )}
             {!features.disableCalendars && (
@@ -118,6 +102,14 @@ const SettingsMenu = () => {
                 selected={location.pathname.startsWith('/settings/command')}
               />
             )}
+            {!features.disableDrivers && (
+              <MenuItem
+                title={t('sharedDrivers')}
+                link="/settings/drivers"
+                icon={<PaymentIcon />}
+                selected={location.pathname.startsWith('/settings/driver')}
+              />
+            )}
           </>
         )}
         {billingLink && (
@@ -127,16 +119,25 @@ const SettingsMenu = () => {
           <MenuItem title={t('settingsSupport')} link={supportLink} icon={<HelpIcon />} />
         )}
       </List>
-      <Divider />
-      <List>
-        <MenuItem
-          title={t('settingsProtocols')}
-          link="/settings/protocols"
-          icon={<RouterIcon />}
-          selected={location.pathname === '/settings/protocols'}
-        />
-        {manager && (
-          <>
+      {manager && (
+        <>
+          <Divider />
+          <List>
+            <MenuItem
+              title={t('deviceTitle')}
+              link="/settings/devices"
+              icon={<DnsIcon />}
+              selected={location.pathname.startsWith('/settings/device')}
+            />
+            <MenuItem
+              title={t('settingsUsers')}
+              link="/settings/users"
+              icon={<DnsIcon />}
+              selected={
+                location.pathname.startsWith('/settings/user') &&
+                location.pathname !== `/settings/user/${userId}`
+              }
+            />
             <MenuItem
               title={t('serverAnnouncement')}
               link="/settings/announcement"
@@ -151,18 +152,9 @@ const SettingsMenu = () => {
                 selected={location.pathname === '/settings/server'}
               />
             )}
-            <MenuItem
-              title={t('settingsUsers')}
-              link="/settings/users"
-              icon={<PeopleIcon />}
-              selected={
-                location.pathname.startsWith('/settings/user') &&
-                location.pathname !== `/settings/user/${userId}`
-              }
-            />
-          </>
-        )}
-      </List>
+          </List>
+        </>
+      )}
     </>
   );
 };

@@ -71,8 +71,10 @@ const TripReportPage = () => {
   const [columns, setColumns] = usePersistedState('tripColumns', [
     'startTime',
     'endTime',
-    'distance',
     'averageSpeed',
+    'maxSpeed',
+    'distance',
+    'duration',
   ]);
   const [tripType, setTripType] = useState(null);
   const [items, setItems] = useState([]);
@@ -202,11 +204,11 @@ const TripReportPage = () => {
         return formatDistance(value, distanceUnit, t);
       case 'averageSpeed':
       case 'maxSpeed':
-        return value > 0 ? formatSpeed(value, speedUnit, t) : null;
+        return formatSpeed(value, speedUnit, t);
       case 'duration':
         return formatNumericHours(value, t);
       case 'spentFuel':
-        return value > 0 ? formatVolume(value, volumeUnit, t) : null;
+        return formatVolume(value, volumeUnit, t);
       case 'startAddress':
         return (
           <AddressValue

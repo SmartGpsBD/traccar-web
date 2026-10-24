@@ -38,9 +38,24 @@ const DriverPage = () => {
                 label={t('sharedName')}
               />
               <TextField
+                value={item.amount || ''}
+                onChange={(event) => setItem({ ...item, amount: event.target.value })}
+                label={t('paymentAmount')}
+              />
+              <TextField
                 value={item.uniqueId || ''}
                 onChange={(event) => setItem({ ...item, uniqueId: event.target.value })}
-                label={t('deviceIdentifier')}
+                label={t('paymentTrx')}
+              />
+              <TextField
+                value={item.validity || ''}
+                onChange={(event) => setItem({ ...item, validity: event.target.value })}
+                label={t('paymentValidity')}
+              />
+              <TextField
+                value={item.time || ''}
+                onChange={(event) => setItem({ ...item, time: event.target.value })}
+                label={t('paymentTime')}
               />
             </AccordionDetails>
           </Accordion>

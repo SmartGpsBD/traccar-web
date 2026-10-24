@@ -124,9 +124,13 @@ const PreferencesPage = () => {
                     label={t('mapActive')}
                     value={
                       attributes.activeMapStyles?.split(',') || [
-                        'locationIqStreets',
-                        'locationIqDark',
-                        'openFreeMap',
+                        'googleRoad',
+                        'googleSatellite',
+                        'googleHybrid',
+                        'mapboxStreets',
+                        'mapboxStreetsDark',
+                        'mapboxOutdoors',
+                        'mapboxSatelliteStreet',
                       ]
                     }
                     onChange={(e, child) => {
@@ -195,10 +199,7 @@ const PreferencesPage = () => {
                   }}
                   value={
                     attributes.positionItems?.split(',') || [
-                      'fixTime',
-                      'address',
-                      'speed',
-                      'totalDistance',
+                      'speed','hours','totalDistance','address','fixTime',
                     ]
                   }
                   onChange={(_, newValue) => {
@@ -310,7 +311,7 @@ const PreferencesPage = () => {
                   label={t('devicePrimaryInfo')}
                 />
                 <SelectField
-                  value={attributes.deviceSecondary}
+                  value={attributes.deviceSecondary || 'uniqueId'}
                   onChange={(e) =>
                     setAttributes({ ...attributes, deviceSecondary: e.target.value })
                   }

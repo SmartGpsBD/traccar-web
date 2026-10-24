@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "days": 30,
+    "amount": 500,
+    "simFee": 300,
+    "simFeeEnable": false,
+    "simText": "Sim Validity To 31-12-2027",
+    "description": "1 Month (30 Days)",
+    "badgeText": "Limited Time",
+    "badge": false
+  },
+  {
+    "id": 2,
+    "days": 60,
+    "amount": 1000,
+    "simFee": 300,
+    "simFeeEnable": false,
+    "simText": "Sim Validity To 31-12-2027",
+    "description": "2 Months (60 Days)",
+    "badgeText": "Most Popular",
+    "badge": false
+  },
+  {
+    "id": 3,
+    "days": 90,
+    "amount": 1350,
+    "simFee": 300,
+    "simFeeEnable": false,
+    "simText": "Sim Validity To 31-12-2027",
+    "description": "3 Months (90 Days)",
+    "badgeText": "450Tk/month",
+    "badge": true
+  },
+  {
+    "id": 4,
+    "days": 120,
+    "amount": 1800,
+    "simFee": 300,
+    "simFeeEnable": false,
+    "simText": "Sim Validity To 31-12-2027",
+    "description": "4 Months (120 Days)",
+    "badgeText": "Hot Deal",
+    "badge": false
+  },
+  {
+    "id": 5,
+    "days": 180,
+    "amount": 2500,
+    "simFee": 300,
+    "simFeeEnable": false,
+    "simText": "Sim Validity To 31-12-2027",
+    "description": "6 Months (180 Days)",
+    "badgeText": "400Tk/month",
+    "badge": false
+  },
+  {
+    "id": 6,
+    "days": 365,
+    "amount": 3000,
+    "simFee": 0,
+    "simFeeEnable": false,
+    "simText": "Sim Validity To 31-12-2027",
+    "description": "12 Months (365 Days)",
+    "badgeText": "No Sim Maintenance Fee",
+    "badge": true
+  }
+]

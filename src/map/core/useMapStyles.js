@@ -48,44 +48,6 @@ export default () => {
   return useMemo(
     () => [
       {
-        id: 'openFreeMap',
-        title: t('mapOpenFreeMap'),
-        style: 'https://tiles.openfreemap.org/styles/liberty',
-        available: true,
-      },
-      {
-        id: 'locationIqStreets',
-        title: t('mapLocationIqStreets'),
-        style: `https://tiles.locationiq.com/v3/streets/vector.json?key=${locationIqKey}`,
-        available: true,
-      },
-      {
-        id: 'locationIqDark',
-        title: t('mapLocationIqDark'),
-        style: `https://tiles.locationiq.com/v3/dark/vector.json?key=${locationIqKey}`,
-        available: true,
-      },
-      {
-        id: 'osm',
-        title: t('mapOsm'),
-        style: styleCustom({
-          tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-          maxZoom: 19,
-          attribution:
-            '© <a target="_top" rel="noopener" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        }),
-        available: true,
-      },
-      {
-        id: 'openTopoMap',
-        title: t('mapOpenTopoMap'),
-        style: styleCustom({
-          tiles: ['a', 'b', 'c'].map((i) => `https://${i}.tile.opentopomap.org/{z}/{x}/{y}.png`),
-          maxZoom: 17,
-        }),
-        available: true,
-      },
-      {
         id: 'googleRoad',
         title: t('mapGoogleRoad'),
         style: styleCustom({
@@ -129,6 +91,92 @@ export default () => {
         }),
         available: true,
         attribute: 'googleKey',
+      },
+      {
+        id: 'mapboxStreets',
+        title: t('mapMapboxStreets'),
+        style: styleCustom({
+          tiles: [
+            `https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=${mapboxAccessToken}`,
+          ],
+          maxZoom: 22,
+        }),
+        available: Boolean(mapboxAccessToken),
+        attribute: 'mapboxAccessToken',
+      },
+      {
+        id: 'mapboxStreetsDark',
+        title: t('mapMapboxStreetsDark'),
+        style: styleCustom({
+          tiles: [
+            `https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?access_token=${mapboxAccessToken}`,
+          ],
+          maxZoom: 22,
+        }),
+        available: Boolean(mapboxAccessToken),
+        attribute: 'mapboxAccessToken',
+      },
+      {
+        id: 'mapboxOutdoors',
+        title: t('mapMapboxOutdoors'),
+        style: styleCustom({
+          tiles: [
+            `https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/tiles/{z}/{x}/{y}?access_token=${mapboxAccessToken}`,
+          ],
+          maxZoom: 22,
+        }),
+        available: Boolean(mapboxAccessToken),
+        attribute: 'mapboxAccessToken',
+      },
+      {
+        id: 'mapboxSatelliteStreet',
+        title: t('mapMapboxSatellite'),
+        style: styleCustom({
+          tiles: [
+            `https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/{z}/{x}/{y}?access_token=${mapboxAccessToken}`,
+          ],
+          maxZoom: 22,
+        }),
+        available: Boolean(mapboxAccessToken),
+        attribute: 'mapboxAccessToken',
+      },
+      {
+        id: 'openFreeMap',
+        title: t('mapOpenFreeMap'),
+        style: 'https://tiles.openfreemap.org/styles/liberty',
+        available: true,
+      },
+      {
+        id: 'locationIqStreets',
+        title: t('mapLocationIqStreets'),
+        style: `https://tiles.locationiq.com/v3/streets/vector.json?key=${locationIqKey}`,
+        available: true,
+      },
+      {
+        id: 'locationIqDark',
+        title: t('mapLocationIqDark'),
+        style: `https://tiles.locationiq.com/v3/dark/vector.json?key=${locationIqKey}`,
+        available: true,
+      },
+      {
+        id: 'osm',
+        title: t('mapOsm'),
+        style: styleCustom({
+          tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+          maxZoom: 19,
+          attribution:
+            '© <a target="_top" rel="noopener" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }),
+        available: true,
+      },
+      {
+        id: 'openTopoMap',
+        title: t('mapOpenTopoMap'),
+        style: styleCustom({
+          tiles: ['a', 'b', 'c'].map((i) => `https://${i}.tile.opentopomap.org/{z}/{x}/{y}.png`),
+          maxZoom: 17,
+        }),
+        available: true,
       },
       {
         id: 'mapTilerBasic',
@@ -288,54 +336,6 @@ export default () => {
           url: `${url}&srs=3857`,
         }),
         available: true,
-      },
-      {
-        id: 'mapboxStreets',
-        title: t('mapMapboxStreets'),
-        style: styleCustom({
-          tiles: [
-            `https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=${mapboxAccessToken}`,
-          ],
-          maxZoom: 22,
-        }),
-        available: Boolean(mapboxAccessToken),
-        attribute: 'mapboxAccessToken',
-      },
-      {
-        id: 'mapboxStreetsDark',
-        title: t('mapMapboxStreetsDark'),
-        style: styleCustom({
-          tiles: [
-            `https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?access_token=${mapboxAccessToken}`,
-          ],
-          maxZoom: 22,
-        }),
-        available: Boolean(mapboxAccessToken),
-        attribute: 'mapboxAccessToken',
-      },
-      {
-        id: 'mapboxOutdoors',
-        title: t('mapMapboxOutdoors'),
-        style: styleCustom({
-          tiles: [
-            `https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/tiles/{z}/{x}/{y}?access_token=${mapboxAccessToken}`,
-          ],
-          maxZoom: 22,
-        }),
-        available: Boolean(mapboxAccessToken),
-        attribute: 'mapboxAccessToken',
-      },
-      {
-        id: 'mapboxSatelliteStreet',
-        title: t('mapMapboxSatellite'),
-        style: styleCustom({
-          tiles: [
-            `https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/{z}/{x}/{y}?access_token=${mapboxAccessToken}`,
-          ],
-          maxZoom: 22,
-        }),
-        available: Boolean(mapboxAccessToken),
-        attribute: 'mapboxAccessToken',
       },
       {
         id: 'custom',

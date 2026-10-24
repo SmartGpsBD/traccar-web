@@ -19,4 +19,6 @@ export default [
   'truck',
   'van',
   'scooter',
+  'General',
+  'Special'
 ];

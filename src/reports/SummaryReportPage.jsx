@@ -67,8 +67,10 @@ const SummaryReportPage = () => {
     'startTime',
     'distance',
     'averageSpeed',
+    'maxSpeed',
+    'engineHours',
   ]);
-  const daily = searchParams.get('daily') === 'true';
+  const daily = searchParams.get('daily') === 'true' || true;
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -130,13 +132,13 @@ const SummaryReportPage = () => {
         return formatDistance(value, distanceUnit, t);
       case 'averageSpeed':
       case 'maxSpeed':
-        return value > 0 ? formatSpeed(value, speedUnit, t) : null;
+        return formatSpeed(value, speedUnit, t);
       case 'engineHours':
       case 'startHours':
       case 'endHours':
-        return value > 0 ? formatNumericHours(value, t) : null;
+        return formatNumericHours(value, t);
       case 'spentFuel':
-        return value > 0 ? formatVolume(value, volumeUnit, t) : null;
+        return formatVolume(value, volumeUnit, t);
       default:
         return value;
     }

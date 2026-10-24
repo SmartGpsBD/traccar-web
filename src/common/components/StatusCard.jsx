@@ -134,7 +134,7 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
   const positionAttributes = usePositionAttributes(t);
   const positionItems = useAttributePreference(
     'positionItems',
-    'fixTime,address,speed,totalDistance',
+    'speed,hours,totalDistance,address,fixTime',
   );
 
   const navigationAppLink = useAttributePreference('navigationAppLink');

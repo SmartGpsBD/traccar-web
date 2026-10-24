@@ -62,6 +62,8 @@ const StopReportPage = () => {
     'startTime',
     'endTime',
     'startOdometer',
+    'duration',
+    'engineHours',
     'address',
   ]);
   const [items, setItems] = useState([]);
@@ -123,9 +125,9 @@ const StopReportPage = () => {
       case 'duration':
         return formatNumericHours(value, t);
       case 'engineHours':
-        return value > 0 ? formatNumericHours(value, t) : null;
+        return formatNumericHours(value, t);
       case 'spentFuel':
-        return value > 0 ? formatVolume(value, volumeUnit, t) : null;
+        return formatVolume(value, volumeUnit, t);
       case 'address':
         return (
           <AddressValue

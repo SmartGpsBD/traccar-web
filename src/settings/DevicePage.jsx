@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import dayjs from 'dayjs';
 import {
   Accordion,
   AccordionSummary,
@@ -89,7 +90,7 @@ const DevicePage = () => {
               />
             </AccordionDetails>
           </Accordion>
-          <Accordion>
+          <Accordion defaultExpanded>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography variant="subtitle1">{t('sharedExtra')}</Typography>
             </AccordionSummary>
@@ -101,29 +102,56 @@ const DevicePage = () => {
                 label={t('groupParent')}
               />
               <TextField
-                value={item.phone || ''}
+                value={item.phone || setItem({ ...item, phone: '0' })}
                 onChange={(event) => setItem({ ...item, phone: event.target.value })}
                 label={t('sharedPhone')}
               />
               <TextField
-                value={item.model || ''}
+                value={item.imei || setItem({ ...item, imei: '0' })}
+                onChange={(event) => setItem({ ...item, imei: event.target.value })}
+                label={t('deviceImei')}
+              />
+              <TextField
+                value={item.model || setItem({ ...item, model: '4G S6 Postpaid' })}
                 onChange={(event) => setItem({ ...item, model: event.target.value })}
                 label={t('deviceModel')}
               />
               <TextField
-                value={item.contact || ''}
+                value={item.activation || setItem({ ...item, activation: dayjs().add(1, 'day').endOf('day').format('YYYY-MM-DD') })}
+                onChange={(event) => setItem({ ...item, activation: event.target.value })}
+                label={t('deviceActivation')}
+              />
+              <TextField
+                value={item.simValidity || setItem({ ...item, simValidity: dayjs().add(1, 'day').endOf('day').format('YYYY-MM-DDTHH:mm:ssZ') })}
+                onChange={(event) => setItem({ ...item, simValidity: event.target.value })}
+                label={t('simValidity')}
+              />
+              <TextField
+                value={item.payment || setItem({ ...item, payment: dayjs().add(1, 'day').endOf('day').format('YYYY-MM-DDTHH:mm:ssZ') })}
+                onChange={(event) => setItem({ ...item, payment: event.target.value })}
+                label={t('devicePayment')}
+              />
+              <TextField
+                value={item.contact || setItem({ ...item, contact: '0' })}
                 onChange={(event) => setItem({ ...item, contact: event.target.value })}
                 label={t('deviceContact')}
               />
               <SelectField
-                value={item.category || 'default'}
-                onChange={(event) => setItem({ ...item, category: event.target.value })}
-                data={deviceCategories
-                  .map((category) => ({
-                    id: category,
-                    name: t(`category${category.replace(/^\w/, (c) => c.toUpperCase())}`),
-                  }))
-                  .sort((a, b) => a.name.localeCompare(b.name))}
+                value={item.category || setItem({ ...item, category: 'default' })}
+                onChange={(event) => {
+                  const selectedCategory = event.target.value;
+                  setItem((prevItem) => ({
+                    ...prevItem,
+                    category: selectedCategory,
+                    payment: selectedCategory === 'Special'
+                      ? dayjs().add(364, 'days').endOf('day').format('YYYY-MM-DDTHH:mm:ssZ')
+                      : prevItem.payment,
+                  }));
+                }}
+                data={deviceCategories.map((category) => ({
+                  id: category,
+                  name: t(`category${category.replace(/^\w/, (c) => c.toUpperCase())}`),
+                }))}
                 label={t('deviceCategory')}
               />
               <SelectField
@@ -135,7 +163,7 @@ const DevicePage = () => {
               <TextField
                 label={t('userExpirationTime')}
                 type="date"
-                value={item.expirationTime ? item.expirationTime.split('T')[0] : '2099-01-01'}
+                value={item.expirationTime ? item.expirationTime.split('T')[0] : setItem({ ...item, expirationTime: dayjs().add(1, 'day').endOf('day').format() })}
                 onChange={(e) => {
                   if (e.target.value) {
                     setItem({ ...item, expirationTime: new Date(e.target.value).toISOString() });

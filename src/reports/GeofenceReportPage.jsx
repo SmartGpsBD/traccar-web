@@ -41,6 +41,7 @@ const GeofenceReportPage = () => {
     'geofenceId',
     'startTime',
     'endTime',
+    'duration',
   ]);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);

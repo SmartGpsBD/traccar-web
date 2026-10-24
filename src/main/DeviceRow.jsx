@@ -77,7 +77,7 @@ const DeviceRow = ({ devices, index, style }) => {
   const position = useSelector((state) => state.session.positions[item.id]);
 
   const devicePrimary = useAttributePreference('devicePrimary', 'name');
-  const deviceSecondary = useAttributePreference('deviceSecondary', '');
+  const deviceSecondary = useAttributePreference('deviceSecondary', 'uniqueId');
 
   const resolveFieldValue = (field) => {
     if (field === 'geofenceIds') {
@@ -99,10 +99,10 @@ const DeviceRow = ({ devices, index, style }) => {
 
   const secondaryText = () => {
     let status;
-    if (item.status === 'online' || !item.lastUpdate) {
-      status = formatStatus(item.status, t);
-    } else {
+    if (item.status === 'online') {
       status = dayjs(item.lastUpdate).fromNow();
+    } else {
+      status = formatStatus(item.status, t);
     }
     return (
       <>

@@ -37,19 +37,20 @@ export const formatConsumption = (value, t) =>
 
 export const formatTime = (value, format) => {
   if (value) {
-    const d = dayjs(value).toDate();
-    const dateConfig = { year: 'numeric', month: '2-digit', day: '2-digit' };
-    const minuteConfig = { hour: '2-digit', minute: '2-digit' };
-    const secondConfig = { ...minuteConfig, second: '2-digit' };
+    const d = dayjs(value);
+
+    // Check for invalid dates
+    if (!d.isValid()) return '';
+
     switch (format) {
       case 'date':
-        return d.toLocaleDateString(undefined, dateConfig);
+        return d.format('DD-MM-YYYY');
       case 'time':
-        return d.toLocaleTimeString(undefined, secondConfig);
+        return d.format('hh:mm:ss A');
       case 'minutes':
-        return d.toLocaleString(undefined, { ...dateConfig, ...minuteConfig });
+        return d.format('DD-MM-YYYY hh:mmA');
       default:
-        return d.toLocaleString(undefined, { ...dateConfig, ...secondConfig });
+        return d.format('DD-MM-YYYY hh:mm:ss A');
     }
   }
   return '';
@@ -149,7 +150,7 @@ export const getStatusColor = (status) => {
       return 'success';
     case 'offline':
       return 'error';
-    case 'unknown':
+    case 'expired':
     default:
       return 'neutral';
   }
