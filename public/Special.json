@@ -1,5 +1,16 @@
 [
   {
+    "id": 1,
+    "days": 30,
+    "amount": 250,
+    "simFee": 300,
+    "simFeeEnable": false,
+    "simText": "1 Year Sim Validity",
+    "description": "1 Month (30 Days)",
+    "badgeText": "Hot Deal",
+    "badge": false
+  },
+  {
     "id": 2,
     "days": 61,
     "amount": 500,
