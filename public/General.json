@@ -25,33 +25,22 @@
     "id": 3,
     "days": 90,
     "amount": 1350,
-    "simFee": 300,
+    "simFee": 0,
     "simFeeEnable": false,
     "simText": "Sim Validity To 31-12-2027",
     "description": "3 Months (90 Days)",
-    "badgeText": "450Tk/month",
+    "badgeText": "সাশ্রয়ী ৪৫০ টাকা/মাস",
     "badge": true
-  },
-  {
-    "id": 4,
-    "days": 120,
-    "amount": 1800,
-    "simFee": 300,
-    "simFeeEnable": false,
-    "simText": "Sim Validity To 31-12-2027",
-    "description": "4 Months (120 Days)",
-    "badgeText": "Hot Deal",
-    "badge": false
   },
   {
     "id": 5,
     "days": 180,
     "amount": 2500,
-    "simFee": 300,
+    "simFee": 0,
     "simFeeEnable": false,
     "simText": "Sim Validity To 31-12-2027",
     "description": "6 Months (180 Days)",
-    "badgeText": "400Tk/month",
+    "badgeText": "416.66TK/Month",
     "badge": false
   },
   {
@@ -62,7 +51,7 @@
     "simFeeEnable": false,
     "simText": "Sim Validity To 31-12-2027",
     "description": "12 Months (365 Days)",
-    "badgeText": "No Sim Maintenance Fee",
+    "badgeText": "অধিক সাশ্রয়ী ২৫০ টাকা/মাস",
     "badge": true
   }
 ]
