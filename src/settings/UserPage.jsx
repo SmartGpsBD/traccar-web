@@ -362,7 +362,7 @@ const UserPage = () => {
                 value={item.expirationTime ? item.expirationTime.split('T')[0] : '2026-01-01'}
                 onChange={(e) => {
                   if (e.target.value) {
-                    setItem({ ...item, expirationTime: new Date(e.target.value).toISOString() });
+                    setItem({ ...item, expirationTime: new Date(e.target.value).endOf('day').toISOString() });
                   }
                 }}
                 disabled={!manager}
