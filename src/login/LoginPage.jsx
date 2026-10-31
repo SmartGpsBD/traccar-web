@@ -30,7 +30,7 @@ import {
 } from '../common/components/NativeInterface';
 import LogoImage from './LogoImage';
 import { useCatch } from '../reactHelper';
-import QrCodeDialog from '../common/components/QrCodeDialog';
+import ServerQrCodeDialog from '../common/components/ServerQrCodeDialog';
 import PasswordField from '../common/components/PasswordField';
 
 const useStyles = makeStyles()((theme) => ({
@@ -108,7 +108,7 @@ const LoginPage = () => {
     setFailed(false);
     try {
       const query = `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
-      const response = await fetch('/api/session', {
+      const response = await fetch('api/session', {
         method: 'POST',
         body: new URLSearchParams(code.length ? `${query}&code=${code}` : query),
       });
@@ -131,7 +131,7 @@ const LoginPage = () => {
   };
 
   const handleTokenLogin = useCatch(async (token) => {
-    const response = await fetch(`/api/session?token=${encodeURIComponent(token)}`);
+    const response = await fetch(`api/session?token=${encodeURIComponent(token)}`);
     if (response.ok) {
       const user = await response.json();
       dispatch(sessionActions.updateUser(user));
@@ -145,7 +145,7 @@ const LoginPage = () => {
   handleTokenLoginRef.current = handleTokenLogin;
 
   const handleOpenIdLogin = () => {
-    document.location = '/api/session/openid/auth';
+    document.location = 'api/session/openid/auth';
   };
 
   useEffect(() => nativePostMessage('authentication'), []);
@@ -281,7 +281,7 @@ const LoginPage = () => {
           </div>
         )}
       </div>
-      <QrCodeDialog open={showQr} onClose={() => setShowQr(false)} />
+      <ServerQrCodeDialog open={showQr} onClose={() => setShowQr(false)} />
     </LoginLayout>
   );
 };

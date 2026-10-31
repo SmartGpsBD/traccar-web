@@ -24,7 +24,7 @@ import SettingsMenu from './components/SettingsMenu';
 import useCommonDeviceAttributes from '../common/attributes/useCommonDeviceAttributes';
 import { useCatch } from '../reactHelper';
 import useSettingsStyles from './common/useSettingsStyles';
-import QrCodeDialog from '../common/components/QrCodeDialog';
+import ServerQrCodeDialog from '../common/components/ServerQrCodeDialog';
 import fetchOrThrow from '../common/util/fetchOrThrow';
 
 const DevicePage = () => {
@@ -46,7 +46,7 @@ const DevicePage = () => {
   const handleFileInput = useCatch(async (newFile) => {
     setImageFile(newFile);
     if (newFile && item?.id) {
-      const response = await fetchOrThrow(`/api/devices/${item.id}/image`, {
+      const response = await fetchOrThrow(`api/devices/${item.id}/image`, {
         method: 'POST',
         body: newFile,
       });
@@ -98,7 +98,7 @@ const DevicePage = () => {
               <SelectField
                 value={item.groupId}
                 onChange={(event) => setItem({ ...item, groupId: Number(event.target.value) })}
-                endpoint="/api/groups"
+                endpoint="api/groups"
                 label={t('groupParent')}
               />
               <TextField
@@ -157,7 +157,7 @@ const DevicePage = () => {
               <SelectField
                 value={item.calendarId}
                 onChange={(event) => setItem({ ...item, calendarId: Number(event.target.value) })}
-                endpoint="/api/calendars"
+                endpoint="api/calendars"
                 label={t('sharedCalendar')}
               />
               <TextField
@@ -208,7 +208,7 @@ const DevicePage = () => {
           />
         </>
       )}
-      <QrCodeDialog open={showQr} onClose={() => setShowQr(false)} />
+      <ServerQrCodeDialog open={showQr} onClose={() => setShowQr(false)} />
     </EditItemView>
   );
 };

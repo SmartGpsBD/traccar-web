@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
@@ -31,6 +31,7 @@ const App = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const desktop = useMediaQuery(theme.breakpoints.up('md'));
 
@@ -39,7 +40,7 @@ const App = () => {
   const user = useSelector((state) => state.session.user);
 
   const acceptTerms = useCatch(async () => {
-    const response = await fetchOrThrow(`/api/users/${user.id}`, {
+    const response = await fetchOrThrow(`api/users/${user.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...user, attributes: { ...user.attributes, termsAccepted: true } }),
@@ -50,20 +51,17 @@ const App = () => {
   useAsyncTask(
     async ({ signal }) => {
       if (!user) {
-        const response = await fetch('/api/session', { signal });
+        const response = await fetch('api/session', { signal });
         if (response.ok) {
           dispatch(sessionActions.updateUser(await response.json()));
         } else {
-          window.sessionStorage.setItem(
-            'postLogin',
-            window.location.pathname + window.location.search,
-          );
+          window.sessionStorage.setItem('postLogin', location.pathname + location.search);
           navigate(newServer ? '/register' : '/login', { replace: true });
         }
       }
       return null;
     },
-    [user, dispatch, navigate, newServer],
+    [user, dispatch, navigate, newServer, location.pathname, location.search],
   );
 
   if (user == null) {

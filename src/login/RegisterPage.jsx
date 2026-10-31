@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, TextField, Typography, IconButton } from '@mui/material';
+import { Button, TextField, Typography, IconButton, InputAdornment } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 import { useNavigate } from 'react-router-dom';
 import LoginLayout from './LoginLayout';
@@ -9,6 +9,7 @@ import { useCatch, useAsyncTask } from '../reactHelper';
 import { messagesActions, sessionActions } from '../store';
 import BackIcon from '../common/components/BackIcon';
 import PasswordField from '../common/components/PasswordField';
+import TotpQrCodeButton from '../common/components/TotpQrCodeButton';
 import fetchOrThrow from '../common/util/fetchOrThrow';
 
 const useStyles = makeStyles()((theme) => ({
@@ -46,7 +47,7 @@ const RegisterPage = () => {
   useAsyncTask(
     async ({ signal }) => {
       if (totpForce) {
-        const response = await fetchOrThrow('/api/users/totp', { method: 'POST', signal });
+        const response = await fetchOrThrow('api/users/totp', { method: 'POST', signal });
         setTotpKey(await response.text());
       }
     },
@@ -55,7 +56,7 @@ const RegisterPage = () => {
 
   const handleSubmit = useCatch(async (event) => {
     event.preventDefault();
-    await fetchOrThrow('/api/users', {
+    await fetchOrThrow('api/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, password, totpKey }),
@@ -111,7 +112,14 @@ const RegisterPage = () => {
             name="totpKey"
             value={totpKey || ''}
             slotProps={{
-              input: { readOnly: true },
+              input: {
+                readOnly: true,
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <TotpQrCodeButton email={email} totpKey={totpKey} />
+                  </InputAdornment>
+                ),
+              },
             }}
           />
         )}

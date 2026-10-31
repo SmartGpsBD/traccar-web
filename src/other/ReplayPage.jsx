@@ -152,7 +152,7 @@ const ReplayPage = () => {
       setSelectedDeviceId(deviceId);
       const query = new URLSearchParams({ deviceId, from, to });
       try {
-        const response = await fetchOrThrow(`/api/positions?${query.toString()}`);
+        const response = await fetchOrThrow(`api/positions?${query.toString()}`);
         setIndex(0);
         const positions = await response.json();
         setPositions(positions);
@@ -169,7 +169,7 @@ const ReplayPage = () => {
 
   const handleDownload = () => {
     const query = new URLSearchParams({ deviceId: selectedDeviceId, from, to });
-    window.location.assign(`/api/positions/kml?${query.toString()}`);
+    window.location.assign(`api/positions/kml?${query.toString()}`);
   };
 
   return (
