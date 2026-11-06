@@ -43,6 +43,8 @@ export const formatTime = (value, format) => {
     if (!d.isValid()) return '';
 
     switch (format) {
+      case 'raw':
+        return d.format('YYYY-MM-DD');
       case 'date':
         return d.format('DD-MM-YYYY');
       case 'time':

@@ -18,7 +18,7 @@ import { formatBoolean, formatTime } from '../common/util/formatter';
 import { useTranslation } from '../common/components/LocalizationProvider';
 import PageLayout from '../common/components/PageLayout';
 import SettingsMenu from './components/SettingsMenu';
-import CollectionFab from './components/CollectionFab';
+import CollectionFab from './components/AddFab';
 import CollectionActions from './components/CollectionActions';
 import TableShimmer from '../common/components/TableShimmer';
 import { useManager } from '../common/util/permissions';
@@ -111,16 +111,24 @@ const UsersPage = () => {
     bValue = bValue ?? '';
 
     if (typeof aValue === 'boolean') {
-      return order === 'asc' ? (aValue === bValue ? 0 : aValue ? -1 : 1) : (aValue === bValue ? 0 : aValue ? 1 : -1);
+      return order === 'asc'
+        ? aValue === bValue
+          ? 0
+          : aValue
+            ? -1
+            : 1
+        : aValue === bValue
+          ? 0
+          : aValue
+            ? 1
+            : -1;
     }
 
     if (typeof aValue === 'string') {
-      return order === 'asc'
-        ? aValue.localeCompare(bValue)
-        : bValue.localeCompare(aValue);
+      return order === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
     }
 
-    return order === 'asc' ? (aValue > bValue ? 1 : -1) : (aValue < bValue ? 1 : -1);
+    return order === 'asc' ? (aValue > bValue ? 1 : -1) : aValue < bValue ? 1 : -1;
   });
 
   const totalColumns = 11;

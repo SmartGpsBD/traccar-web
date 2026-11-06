@@ -199,7 +199,11 @@ const PreferencesPage = () => {
                   }}
                   value={
                     attributes.positionItems?.split(',') || [
-                      'speed','hours','totalDistance','address','fixTime',
+                      'speed',
+                      'hours',
+                      'totalDistance',
+                      'address',
+                      'fixTime',
                     ]
                   }
                   onChange={(_, newValue) => {

@@ -1,17 +1,10 @@
 import { useCallback, useReducer, useState } from 'react';
-import {
-  Table,
-  TableRow,
-  TableCell,
-  TableHead,
-  TableBody,
-  TableSortLabel,
-} from '@mui/material';
+import { Table, TableRow, TableCell, TableHead, TableBody, TableSortLabel } from '@mui/material';
 import { useAsyncTask } from '../reactHelper';
 import { useTranslation } from '../common/components/LocalizationProvider';
 import PageLayout from '../common/components/PageLayout';
 import SettingsMenu from './components/SettingsMenu';
-import CollectionFab from './components/CollectionFab';
+import CollectionFab from './components/AddFab';
 import CollectionActions from './components/CollectionActions';
 import { useManager } from '../common/util/permissions';
 import TableShimmer from '../common/components/TableShimmer';
@@ -64,9 +57,15 @@ const DriversPage = () => {
     return (
       item.name?.toLowerCase().includes(query) ||
       item.uniqueId?.toLowerCase().includes(query) ||
-      String(item.amount ?? '').toLowerCase().includes(query) ||
-      String(item.validity ?? '').toLowerCase().includes(query) ||
-      String(item.time ?? '').toLowerCase().includes(query) ||
+      String(item.amount ?? '')
+        .toLowerCase()
+        .includes(query) ||
+      String(item.validity ?? '')
+        .toLowerCase()
+        .includes(query) ||
+      String(item.time ?? '')
+        .toLowerCase()
+        .includes(query) ||
       String(item.id).includes(query)
     );
   });
@@ -80,12 +79,10 @@ const DriversPage = () => {
     bValue = bValue ?? '';
 
     if (typeof aValue === 'string') {
-      return order === 'asc'
-        ? aValue.localeCompare(bValue)
-        : bValue.localeCompare(aValue);
+      return order === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
     }
 
-    return order === 'asc' ? (aValue > bValue ? 1 : -1) : (aValue < bValue ? 1 : -1);
+    return order === 'asc' ? (aValue > bValue ? 1 : -1) : aValue < bValue ? 1 : -1;
   });
 
   const totalColumns = 7; // 6 data columns + 1 action column
@@ -173,22 +170,20 @@ const DriversPage = () => {
                 <TableCell>{item.time}</TableCell>
                 {manager && (
                   <TableCell className={classes.columnAction} padding="none">
-                  <CollectionActions
-                    itemId={item.id}
-                    editPath="/settings/driver"
-                    endpoint="drivers"
-                    onReload={reload}
-                  />
-                </TableCell>
+                    <CollectionActions
+                      itemId={item.id}
+                      editPath="/settings/driver"
+                      endpoint="drivers"
+                      onReload={reload}
+                    />
+                  </TableCell>
                 )}
               </TableRow>
             ))
           )}
         </TableBody>
       </Table>
-      {manager && (
-        <CollectionFab editPath="/settings/driver" />
-      )}
+      {manager && <CollectionFab editPath="/settings/driver" />}
     </PageLayout>
   );
 };

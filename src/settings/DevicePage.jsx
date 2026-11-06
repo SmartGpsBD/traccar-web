@@ -122,17 +122,35 @@ const DevicePage = () => {
                 label={t('deviceModel')}
               />
               <TextField
-                value={item.activation || setItem({ ...item, activation: dayjs().add(1, 'day').endOf('day').format('YYYY-MM-DD') })}
+                value={
+                  item.activation ||
+                  setItem({
+                    ...item,
+                    activation: dayjs().add(1, 'day').endOf('day').format('YYYY-MM-DD'),
+                  })
+                }
                 onChange={(event) => setItem({ ...item, activation: event.target.value })}
                 label={t('deviceActivation')}
               />
               <TextField
-                value={item.simValidity || setItem({ ...item, simValidity: dayjs().add(1, 'day').endOf('day').format('YYYY-MM-DDTHH:mm:ssZ') })}
+                value={
+                  item.simValidity ||
+                  setItem({
+                    ...item,
+                    simValidity: dayjs().add(1, 'day').endOf('day').format('YYYY-MM-DDTHH:mm:ssZ'),
+                  })
+                }
                 onChange={(event) => setItem({ ...item, simValidity: event.target.value })}
                 label={t('simValidity')}
               />
               <TextField
-                value={item.payment || setItem({ ...item, payment: dayjs().add(1, 'day').endOf('day').format('YYYY-MM-DDTHH:mm:ssZ') })}
+                value={
+                  item.payment ||
+                  setItem({
+                    ...item,
+                    payment: dayjs().add(1, 'day').endOf('day').format('YYYY-MM-DDTHH:mm:ssZ'),
+                  })
+                }
                 onChange={(event) => setItem({ ...item, payment: event.target.value })}
                 label={t('devicePayment')}
               />
@@ -148,9 +166,10 @@ const DevicePage = () => {
                   setItem((prevItem) => ({
                     ...prevItem,
                     category: selectedCategory,
-                    payment: selectedCategory === 'Special'
-                      ? dayjs().add(364, 'days').endOf('day').format('YYYY-MM-DDTHH:mm:ssZ')
-                      : prevItem.payment,
+                    payment:
+                      selectedCategory === 'Special'
+                        ? dayjs().add(364, 'days').endOf('day').format('YYYY-MM-DDTHH:mm:ssZ')
+                        : prevItem.payment,
                   }));
                 }}
                 data={deviceCategories.map((category) => ({
@@ -168,10 +187,20 @@ const DevicePage = () => {
               <TextField
                 label={t('userExpirationTime')}
                 type="date"
-                value={item.expirationTime ? item.expirationTime.split('T')[0] : setItem({ ...item, expirationTime: dayjs().add(1, 'day').endOf('day').format() })}
+                value={
+                  item.expirationTime
+                    ? item.expirationTime.split('T')[0]
+                    : setItem({
+                        ...item,
+                        expirationTime: dayjs().add(1, 'day').endOf('day').format(),
+                      })
+                }
                 onChange={(e) => {
                   if (e.target.value) {
-                    setItem({ ...item, expirationTime: new Date(e.target.value).endOf('day').toISOString() });
+                    setItem({
+                      ...item,
+                      expirationTime: new Date(e.target.value).endOf('day').toISOString(),
+                    });
                   }
                 }}
                 disabled={!manager}

@@ -20,5 +20,5 @@ export default [
   'van',
   'scooter',
   'General',
-  'Special'
+  'Special',
 ];

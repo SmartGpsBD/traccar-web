@@ -157,7 +157,11 @@ const BottomMenu = () => {
             value="logout"
           />
         ) : (
-          <BottomNavigationAction label={t('loginLogout')} icon={<ExitToAppIcon />} value="account" />
+          <BottomNavigationAction
+            label={t('loginLogout')}
+            icon={<ExitToAppIcon />}
+            value="account"
+          />
         )}
       </BottomNavigation>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => setAnchorEl(null)}>

@@ -1,5 +1,4 @@
 import { useCallback, useReducer, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
   Table,
@@ -103,12 +102,10 @@ const DevicesPage = () => {
     bValue = bValue ?? '';
 
     if (typeof aValue === 'string') {
-      return order === 'asc'
-        ? aValue.localeCompare(bValue)
-        : bValue.localeCompare(aValue);
+      return order === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
     }
 
-    return order === 'asc' ? (aValue > bValue ? 1 : -1) : (aValue < bValue ? 1 : -1);
+    return order === 'asc' ? (aValue > bValue ? 1 : -1) : aValue < bValue ? 1 : -1;
   });
 
   const handleExport = async () => {
@@ -198,9 +195,9 @@ const DevicesPage = () => {
                 active={orderBy === 'nationalId'}
                 direction={orderBy === 'nationalId' ? order : 'asc'}
                 onClick={() => handleRequestSort('nationalId')}
-               >
+              >
                 NID
-               </TableSortLabel>
+              </TableSortLabel>
             </TableCell>
             <TableCell sortDirection={orderBy === 'model' ? order : false}>
               <TableSortLabel
