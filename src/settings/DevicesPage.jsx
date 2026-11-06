@@ -19,7 +19,7 @@ import { useAsyncTask } from '../reactHelper';
 import { useTranslation } from '../common/components/LocalizationProvider';
 import PageLayout from '../common/components/PageLayout';
 import SettingsMenu from './components/SettingsMenu';
-import CollectionFab from './components/CollectionFab';
+import CollectionFab from './components/AddFab';
 import CollectionActions from './components/CollectionActions';
 import TableShimmer from '../common/components/TableShimmer';
 import SearchHeader from './components/SearchHeader';
@@ -120,10 +120,10 @@ const DevicesPage = () => {
       IMEI: item.imei,
       [t('deviceModel')]: item.model,
       Activation: item.activation,
-      Payment: formatTime(item.payment, 'date'),
+      SimValidity: formatTime(item.payment, 'raw'),
       [t('deviceContact')]: item.contact,
       Category: item.category,
-      [t('userExpirationTime')]: formatTime(item.expirationTime, 'date'),
+      [t('userExpirationTime')]: formatTime(item.expirationTime, 'raw'),
     }));
     const sheets = new Map();
     sheets.set(t('deviceTitle'), data);
@@ -184,7 +184,6 @@ const DevicesPage = () => {
                 {t('sharedPhone')}
               </TableSortLabel>
             </TableCell>
-
             <TableCell sortDirection={orderBy === 'imei' ? order : false}>
               <TableSortLabel
                 active={orderBy === 'imei'}
@@ -194,7 +193,15 @@ const DevicesPage = () => {
                 IMEI
               </TableSortLabel>
             </TableCell>
-
+            <TableCell sortDirection={orderBy === 'nationalId' ? order : false}>
+              <TableSortLabel
+                active={orderBy === 'nationalId'}
+                direction={orderBy === 'nationalId' ? order : 'asc'}
+                onClick={() => handleRequestSort('nationalId')}
+               >
+                NID
+               </TableSortLabel>
+            </TableCell>
             <TableCell sortDirection={orderBy === 'model' ? order : false}>
               <TableSortLabel
                 active={orderBy === 'model'}
@@ -204,7 +211,6 @@ const DevicesPage = () => {
                 {t('deviceModel')}
               </TableSortLabel>
             </TableCell>
-
             <TableCell sortDirection={orderBy === 'activation' ? order : false}>
               <TableSortLabel
                 active={orderBy === 'activation'}
@@ -214,17 +220,15 @@ const DevicesPage = () => {
                 Activation
               </TableSortLabel>
             </TableCell>
-
-            <TableCell sortDirection={orderBy === 'payment' ? order : false}>
+            <TableCell sortDirection={orderBy === 'simvalidity' ? order : false}>
               <TableSortLabel
-                active={orderBy === 'payment'}
-                direction={orderBy === 'payment' ? order : 'asc'}
-                onClick={() => handleRequestSort('payment')}
+                active={orderBy === 'simvalidity'}
+                direction={orderBy === 'simvalidity' ? order : 'asc'}
+                onClick={() => handleRequestSort('simvalidity')}
               >
-                Payment
+                SimValidity
               </TableSortLabel>
             </TableCell>
-
             <TableCell sortDirection={orderBy === 'contact' ? order : false}>
               <TableSortLabel
                 active={orderBy === 'contact'}
@@ -234,7 +238,6 @@ const DevicesPage = () => {
                 {t('deviceContact')}
               </TableSortLabel>
             </TableCell>
-
             <TableCell sortDirection={orderBy === 'category' ? order : false}>
               <TableSortLabel
                 active={orderBy === 'category'}
@@ -244,7 +247,6 @@ const DevicesPage = () => {
                 Category
               </TableSortLabel>
             </TableCell>
-
             <TableCell sortDirection={orderBy === 'expirationTime' ? order : false}>
               <TableSortLabel
                 active={orderBy === 'expirationTime'}
@@ -269,12 +271,13 @@ const DevicesPage = () => {
                 <TableCell>{item.uniqueId}</TableCell>
                 <TableCell>{item.phone}</TableCell>
                 <TableCell>{item.imei}</TableCell>
+                <TableCell>{item.nationalId}</TableCell>
                 <TableCell>{item.model}</TableCell>
                 <TableCell>{item.activation}</TableCell>
-                <TableCell>{formatTime(item.payment, 'date')}</TableCell>
+                <TableCell>{formatTime(item.simValidity, 'raw')}</TableCell>
                 <TableCell>{item.contact}</TableCell>
                 <TableCell>{item.category}</TableCell>
-                <TableCell>{formatTime(item.expirationTime, 'date')}</TableCell>
+                <TableCell>{formatTime(item.expirationTime, 'raw')}</TableCell>
                 {manager && (
                   <TableCell>
                     <DeviceUsersValue deviceId={item.id} />

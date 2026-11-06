@@ -112,6 +112,11 @@ const DevicePage = () => {
                 label={t('deviceImei')}
               />
               <TextField
+                value={item.nationalId || setItem({ ...item, nationalId: '0' })}
+                onChange={(event) => setItem({ ...item, nationalId: event.target.value })}
+                label={'NID'}
+              />
+              <TextField
                 value={item.model || setItem({ ...item, model: '4G S6 Postpaid' })}
                 onChange={(event) => setItem({ ...item, model: event.target.value })}
                 label={t('deviceModel')}
