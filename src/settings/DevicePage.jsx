@@ -192,14 +192,14 @@ const DevicePage = () => {
                     ? item.expirationTime.split('T')[0]
                     : setItem({
                         ...item,
-                        expirationTime: dayjs().add(1, 'day').endOf('day').format(),
+                        expirationTime: dayjs().endOf('day').add(1, 'day').format(),
                       })
                 }
                 onChange={(e) => {
                   if (e.target.value) {
                     setItem({
                       ...item,
-                      expirationTime: new Date(e.target.value).endOf('day').toISOString(),
+                      expirationTime: dayjs(e.target.value).endOf('day').format(),
                     });
                   }
                 }}
