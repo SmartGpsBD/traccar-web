@@ -311,6 +311,16 @@ const UserPage = () => {
                 onChange={(e) => setItem({ ...item, poiLayer: e.target.value })}
                 label={t('mapPoiLayer')}
               />
+              <TextField
+                value={item.bkashAgreement || ''}
+                onChange={(e) => setItem({ ...item, bkashAgreement: e.target.value })}
+                label={"Bkash Agreement"}
+              />
+              <TextField
+                value={item.bkashNumber || ''}
+                onChange={(e) => setItem({ ...item, bkashNumber: e.target.value })}
+                label={"Bkash Number"}
+              />
             </AccordionDetails>
           </Accordion>
           <Accordion>
