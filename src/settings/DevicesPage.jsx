@@ -297,7 +297,7 @@ const DevicesPage = () => {
         <TableFooter>
           <TableRow>
             <TableCell>
-              <Button onClick={handleExport} variant="text">
+              <Button onClick={handleExport} variant="text" disabled={!items.length}>
                 {t('reportExport')}
               </Button>
             </TableCell>

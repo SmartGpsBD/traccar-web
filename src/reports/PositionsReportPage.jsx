@@ -103,6 +103,7 @@ const PositionsReportPage = () => {
           [...keyList, ...keySet].map((key) => [key, positionAttributes[key]?.name || key]),
         );
         setItems(data);
+        setSelectedItem(null);
       } finally {
         setLoading(false);
       }
