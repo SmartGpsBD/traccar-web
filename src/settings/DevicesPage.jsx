@@ -190,15 +190,6 @@ const DevicesPage = () => {
                 IMEI
               </TableSortLabel>
             </TableCell>
-            <TableCell sortDirection={orderBy === 'nationalId' ? order : false}>
-              <TableSortLabel
-                active={orderBy === 'nationalId'}
-                direction={orderBy === 'nationalId' ? order : 'asc'}
-                onClick={() => handleRequestSort('nationalId')}
-              >
-                NID
-              </TableSortLabel>
-            </TableCell>
             <TableCell sortDirection={orderBy === 'model' ? order : false}>
               <TableSortLabel
                 active={orderBy === 'model'}
@@ -268,7 +259,6 @@ const DevicesPage = () => {
                 <TableCell>{item.uniqueId}</TableCell>
                 <TableCell>{item.phone}</TableCell>
                 <TableCell>{item.imei}</TableCell>
-                <TableCell>{item.nationalId}</TableCell>
                 <TableCell>{item.model}</TableCell>
                 <TableCell>{item.activation}</TableCell>
                 <TableCell>{formatTime(item.simValidity, 'raw')}</TableCell>

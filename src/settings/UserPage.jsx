@@ -315,11 +315,13 @@ const UserPage = () => {
                 value={item.bkashAgreement || ''}
                 onChange={(e) => setItem({ ...item, bkashAgreement: e.target.value })}
                 label={'Bkash Agreement'}
+                disabled={!manager}
               />
               <TextField
                 value={item.bkashNumber || ''}
                 onChange={(e) => setItem({ ...item, bkashNumber: e.target.value })}
                 label={'Bkash Number'}
+                disabled={!manager}
               />
             </AccordionDetails>
           </Accordion>

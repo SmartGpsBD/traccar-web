@@ -5,8 +5,8 @@
     "amount": 500,
     "simFee": 300,
     "simFeeEnable": false,
-    "simText": "+ 1 year sim validity",
-    "description": "1 Month (30 Days)",
+    "title": "1 Month (30 Days)",
+    "description": "+ 1 year sim validity",
     "badgeText": "Limited Time",
     "badge": false
   },
@@ -16,8 +16,8 @@
     "amount": 1000,
     "simFee": 300,
     "simFeeEnable": false,
-    "simText": "+ 1 year sim validity",
-    "description": "2 Months (60 Days)",
+    "title": "2 Months (60 Days)",
+    "description": "+ 1 year sim validity",
     "badgeText": "Most Popular",
     "badge": false
   },
@@ -27,8 +27,8 @@
     "amount": 1400,
     "simFee": 300,
     "simFeeEnable": false,
-    "simText": "+ 1 year sim validity",
-    "description": "3 Months (90 Days)",
+    "title": "3 Months (90 Days)",
+    "description": "+ 1 year sim validity",
     "badgeText": "সাশ্রয়ী ৪৫০ টাকা/মাস",
     "badge": false
   },
@@ -38,8 +38,8 @@
     "amount": 1800,
     "simFee": 300,
     "simFeeEnable": false,
-    "simText": "+ 1 year sim validity",
-    "description": "4 Months (120 Days)",
+    "title": "4 Months (120 Days)",
+    "description": "+ 1 year sim validity",
     "badgeText": "সাশ্রয়ী ৪৫০ টাকা/মাস",
     "badge": true
   },
@@ -49,8 +49,8 @@
     "amount": 2500,
     "simFee": 300,
     "simFeeEnable": false,
-    "simText": "+ 1 year sim validity",
-    "description": "6 Months (180 Days)",
+    "title": "6 Months (180 Days)",
+    "description": "+ 1 year sim validity",
     "badgeText": "416.66TK/Month",
     "badge": false
   },
@@ -60,8 +60,8 @@
     "amount": 3000,
     "simFee": 0,
     "simFeeEnable": false,
-    "simText": "+ 1 year sim validity",
-    "description": "12 Months (365 Days)",
+    "title": "12 Months (365 Days)",
+    "description": "+ 1 year sim validity",
     "badgeText": "অধিক সাশ্রয়ী ২৫০ টাকা/মাস",
     "badge": true
   }
