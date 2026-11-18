@@ -14,8 +14,9 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useTranslation } from '../common/components/LocalizationProvider';
 import PageLayout from '../common/components/PageLayout';
+import RemoveDialog from '../common/components/RemoveDialog';
 import SettingsMenu from './components/SettingsMenu';
-import { useCatchCallback } from '../reactHelper';
+import { useAsyncTask, useCatchCallback } from '../reactHelper';
 import useSettingsStyles from './common/useSettingsStyles';
 import fetchOrThrow from '../common/util/fetchOrThrow';
 
@@ -33,7 +34,23 @@ const SharePage = () => {
   const [expiration, setExpiration] = useState(() =>
     dayjs().add(1, 'week').locale('en').format('YYYY-MM-DDTHH:mm'),
   );
-  const [link, setLink] = useState();
+  const [share, setShare] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [removing, setRemoving] = useState(false);
+  const link = share ? `${document.baseURI}?token=${share.token}` : '';
+
+  useAsyncTask(
+    async ({ signal }) => {
+      const response = await fetch(`api/share/${type}?${type}Id=${id}`, { signal });
+      if (response.ok) {
+        setShare(await response.json());
+      } else if (response.status !== 404) {
+        throw new Error(await response.text());
+      }
+      setLoading(false);
+    },
+    [id, type],
+  );
 
   const handleShare = useCatchCallback(async () => {
     const expirationTime = dayjs(expiration).toISOString();
@@ -41,9 +58,8 @@ const SharePage = () => {
       method: 'POST',
       body: new URLSearchParams(`${type}Id=${id}&expiration=${expirationTime}`),
     });
-    const token = await response.text();
-    setLink(`${document.baseURI}?token=${token}`);
-  }, [id, expiration, type, setLink]);
+    setShare(await response.json());
+  }, [id, expiration, type]);
 
   return (
     <PageLayout menu={<SettingsMenu />} breadcrumbs={['sharedShare']}>
@@ -61,15 +77,23 @@ const SharePage = () => {
             <TextField
               label={t('userExpirationTime')}
               type="datetime-local"
-              value={expiration}
+              value={
+                share ? dayjs(share.expiration).locale('en').format('YYYY-MM-DDTHH:mm') : expiration
+              }
               onChange={(e) => setExpiration(e.target.value)}
+              disabled={loading || !!share}
             />
-            <Button variant="outlined" color="primary" onClick={handleShare}>
-              {t('reportShow')}
-            </Button>
+            {share ? (
+              <Button variant="outlined" color="error" onClick={() => setRemoving(true)}>
+                {t('sharedRemove')}
+              </Button>
+            ) : (
+              <Button variant="outlined" color="primary" onClick={handleShare} disabled={loading}>
+                {t('reportShow')}
+              </Button>
+            )}
             <TextField
-              value={link || ''}
-              onChange={(e) => setLink(e.target.value)}
+              value={link}
               label={t('sharedLink')}
               slotProps={{ input: { readOnly: true } }}
             />
@@ -89,6 +113,15 @@ const SharePage = () => {
             {t('sharedCopy')}
           </Button>
         </div>
+        <RemoveDialog
+          open={removing}
+          endpoint={`share/${type}`}
+          itemId={id}
+          onResult={(removed) => {
+            if (removed) setShare(null);
+            setRemoving(false);
+          }}
+        />
       </Container>
     </PageLayout>
   );
